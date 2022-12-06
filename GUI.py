@@ -1,241 +1,14 @@
+import time
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-import matplotlib.pyplot as plt
-import random
 import numpy as np
 import sys, os,cv2
 from gif_arkaplansilme import gif_background_delete as clear_gif
+from setting import Right_menu
+from gift_menu import Left_menu
 
 
-
-class Right_menu(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.setting3_value=23
-        self.setting()
-    def QObje(self,obje,min,max,step,size=(100,10),value=0,togather=None):
-        # Kaydırma tuşunun hareket edeceği minimum ve maksimum değerlerini ayarlayın
-        o=obje
-        o.setMinimum(min)
-        o.setMaximum(max)
-        # Kaydırma tuşunun ne kadar adımda hareket edeceğini ayarlayın
-        o.setSingleStep(step)
-        o.setFixedWidth(size[0])
-        o.setFixedHeight(size[1])
-        o.setValue(value)
-        return o
-    def Checkboxx(self,checbox,name="",ceched=False,tristate=False):
-        # QCheckBox nesnesini oluşturun ve metni ayarlayın
-        checbox.setText(name)
-        # Seçme butonunun seçili olup olmadığını ayarlayın
-        checbox.setChecked(ceched)
-        return checbox
-
-    def Comboboxx(self,items=[],size=(100,30),edit=False):
-        combo = QComboBox()
-        combo.addItems(items)
-        # Seçme butonunun düzenlenebilir olup olmadığını ayarlayın
-        combo.setEditable(edit)
-        combo.setFixedWidth(size[0])
-        combo.setFixedHeight(size[1])
-        return  combo
-    def gif_upload(self,src):
-        liste=[]
-        for i in os.listdir(src):
-            if i.endswith(".gif"):
-                liste.append(i)
-
-        return liste
-    def setting(self):
-        ###############################################   the button dowloand files
-        self.start = QPushButton(self)
-        self.start.setText("start")
-        self.start.setFont(QFont("Ariel", 10))
-
-        ###############################################  the button for world control
-        self.stop_gif = QPushButton(self)
-        self.stop_gif.setText("stop")
-        self.stop_gif.setFont(QFont("Ariel", 10))
-        ###############################################  # MIN threshold
-        self.MIN =  self.QObje(QSlider(Qt.Horizontal),0,255,1,(200,20))
-        self.MIN_V =  self.QObje(QSpinBox(),0,255,1,(50,20))
-        self.MIN_V.valueChanged.connect(self.MIN.setValue)
-        self.MIN.valueChanged.connect(self.MIN_V.setValue)
-
-        ###############################################  # MAX threshold
-        self.MAX =  self.QObje(QSlider(Qt.Horizontal),0,255,1,(200,20),value=255)
-        self.MAX_V =  self.QObje(QSpinBox(),0,255,1,(50,20),value=255)
-        self.MAX_V.valueChanged.connect(self.MAX.setValue)
-        self.MAX.valueChanged.connect(self.MAX_V.setValue)
-        ######################################################################
-        self.frame=self.Checkboxx(QCheckBox(),"orginal",True)
-        self.mask=self.Checkboxx(QCheckBox(),"black mask",True)
-        self.green=self.Checkboxx(QCheckBox(),"white mask",True)
-        self.revers_mask=self.Checkboxx(QCheckBox(),"frame",True)
-        ###############################################  # GİF SPEAT
-        self.SPEAD =  self.QObje(QSlider(Qt.Horizontal),1,1000,50,(200,20),value=255)
-        self.SPEAD_V =  self.QObje(QSpinBox(),1,1000,50,(50,20),value=255)
-        self.SPEAD_V.valueChanged.connect(self.SPEAD.setValue)
-        self.SPEAD.valueChanged.connect(self.SPEAD_V.setValue)
-
-
-
-        ###############################################   arrangement
-        self.hsv_or_threshold=self.Comboboxx(["threshold","hsv"])
-        self.gifs=self.Comboboxx(self.gif_upload(src="img_and_gift"),size=(220,30))
-
-
-
-        v = QVBoxLayout()
-        l = QHBoxLayout()
-        l.addWidget(QLabel("<h1><i> SETTİNG LAYER </i></h1>"))
-        l.addStretch()
-        v.addLayout(l)
-        v.addStretch()
-
-
-        setting=QVBoxLayout()
-
-        up_setting = QHBoxLayout()
-        up_setting.addWidget(self.hsv_or_threshold)
-        up_setting.addStretch()
-        up_setting.addWidget(self.gifs)
-        up_setting.addStretch()
-        setting.addLayout(up_setting)
-        setting.addStretch()
-        setting.addStretch()
-
-
-
-        checck = QHBoxLayout()
-        checck.addStretch()
-        checck.addWidget(self.frame)
-        checck.addStretch()
-        checck.addWidget(self.mask)
-        checck.addStretch()
-        checck.addWidget(self.green)
-        checck.addStretch()
-        checck.addWidget(self.revers_mask)
-        checck.addStretch()
-        setting.addLayout(checck)
-        setting.addStretch()
-        setting.addStretch()
-
-
-
-
-        button3 = QHBoxLayout()
-        button3.addStretch()
-        button3.addWidget(QLabel("Min : "))
-        button3.addStretch()
-        button3.addWidget(self.MIN)
-        button3.addStretch()
-        button3.addWidget(self.MIN_V)
-        button3.addStretch()
-        setting.addLayout(button3)
-        setting.addStretch()
-
-
-        button3 = QHBoxLayout()
-        button3.addWidget(QLabel("Max : "))
-        button3.addStretch()
-        button3.addWidget(self.MAX)
-        button3.addStretch()
-        button3.addWidget(self.MAX_V)
-        button3.addStretch()
-        setting.addLayout(button3)
-        setting.addStretch()
-
-
-        sped = QHBoxLayout()
-        sped.addWidget(QLabel("Sped : "))
-        sped.addStretch()
-        sped.addWidget(self.SPEAD)
-        sped.addStretch()
-        sped.addWidget(self.SPEAD_V)
-        sped.addStretch()
-        setting.addLayout(sped)
-        setting.addStretch()
-
-
-        v.addLayout(setting)
-
-        v.addStretch()
-        v.addStretch()
-        v.addStretch()
-        v.addStretch()
-
-        button1 = QHBoxLayout()
-        button1.addWidget(self.start)
-        button1.addStretch()
-        button1.addWidget(self.stop_gif)
-        button1.addStretch()
-        v.addLayout(button1)
-
-        v.addStretch()
-
-        self.setLayout(v)
-
-
-
-class Left_menu(QWidget):
-    def __init__(self):
-        super().__init__()
-
-        self.etiketler()
-    def boxses(self,img,text):
-        boxx = QVBoxLayout()
-        boxx.addWidget(text)
-        boxx.addStretch()
-        boxx.addWidget(img)
-        return boxx
-    def etiketler(self):
-        ###############################################   app main icon
-        self.resim1 = QLabel(self)
-        self.resim1_abount=QLabel(self)
-        ###############################################   app main icon
-        self.resim2 = QLabel(self)
-        self.resim2_abount=QLabel(self)
-        ###############################################   app main icon
-        self.resim3 = QLabel(self)
-        self.resim3_abount=QLabel(self)
-        ###############################################   app main icon
-        self.resim4 = QLabel(self)
-        self.resim4_abount=QLabel(self)
-        ###############################################   arrangement
-        v = QVBoxLayout()
-        l = QHBoxLayout()
-        l.addWidget(QLabel("<h1><i> IMAGES LAYER </i></h1>"))
-        l.addStretch()
-        v.addLayout(l)
-
-        img_parse1 = QHBoxLayout()
-        img_parse1.addStretch()
-        box1=self.boxses(self.resim1,self.resim1_abount)
-        img_parse1.addLayout(box1)
-        img_parse1.addStretch()
-        box2 = self.boxses(self.resim2,self.resim2_abount)
-        img_parse1.addLayout(box2)
-        img_parse1.addStretch()
-        v.addLayout(img_parse1)
-
-        v.addStretch()
-        v.addStretch()
-
-        img_parse2 = QHBoxLayout()
-        img_parse2.addStretch()
-        box3=self.boxses(self.resim3,self.resim3_abount)
-        img_parse2.addLayout(box3)
-        img_parse1.addStretch()
-        box4 = self.boxses(self.resim4,self.resim4_abount)
-        img_parse2.addLayout(box4)
-        img_parse2.addStretch()
-        v.addLayout(img_parse2)
-
-        v.addStretch()
-
-        self.setLayout(v)
 
 
 class setup(QMainWindow):
@@ -245,14 +18,16 @@ class setup(QMainWindow):
         ##########################################################  table
         self.left_menu = Left_menu()
         self.right_menu = Right_menu()
+
         ######################################################  setup settings
-        self.setWindowTitle("VİDEO DOWLAND VS: 30.3 ")
+        self.setWindowTitle("GİFT EDİT  VS: 7.12.22 ")
         self.setWindowIcon(QIcon("logo.ico"))
-        self.setMinimumSize(1000,800)
+        self.setMinimumSize(1200,800)
 
 
         self.fixed_size=(300,300)
         self.start=True
+        self.start_gif=True
         ######################################################## they parameters 'boundedTo', 'expandedTo', 'grownBy','scale', 'scaled', 'setHeight', 'setWidth', 'shrunkBy', 'transpose', 'transposed', 'width'
         self.içerik()
 
@@ -267,6 +42,7 @@ class setup(QMainWindow):
 
         ######################################################  table menu
         self.tablo = QTabWidget()
+
         self.tablo.tablo1 = QWidget()
         self.tablo.tablo2 = QWidget()
         self.tablo.tablo3 = QWidget()
@@ -289,7 +65,14 @@ class setup(QMainWindow):
         self.right_menu.start.clicked.connect(self.show_gif)
         self.right_menu.stop_gif.clicked.connect(self.stoped)
 
+        self.right_menu.gifs.currentIndexChanged.connect(self.stop_gif)
+
+
+
+
     def tab1(self):
+
+
         ############################################################### main_menu fulling
         parse = QHBoxLayout()
         parse.addWidget(self.left_menu)
@@ -297,6 +80,8 @@ class setup(QMainWindow):
         parse.addStretch()
         parse.addStretch()
         parse.addWidget(self.right_menu)
+
+
         self.tablo.tablo1.setLayout(parse)
     def dowloand(self):
         try:
@@ -323,23 +108,31 @@ class setup(QMainWindow):
     def stoped(self):
         self.start=False
 
-
+    def stop_gif(self):
+        self.start_gif=False
     def show_gif(self):
 
         self.start=True
         clear=clear_gif()
         while self.start:
-            gif=cv2.VideoCapture("img_and_gift/"+self.right_menu.gifs.currentText())
+            self.start_gif=True
+            self.gif_video=cv2.VideoCapture("img_and_gift/"+self.right_menu.gifs.currentText())
 
-            while True:
-                okay, orginal_frame = gif.read()
-
+            while self.start_gif:
+                okay, orginal_frame = self.gif_video.read()
                 if not okay or not self.start:
                     break
 
+
+
+
                 orginal_frame=cv2.resize(orginal_frame,(300,300))
 
-                frame,mask,green=clear.Delete(orginal_frame,hsv=False,background="white",
+                frame,black_mask,white_mask=clear.Delete(orginal_frame,
+                                              hsv= True if self.right_menu.hsv_or_threshold.currentText()=="hsv" else False,
+                                              background="white",
+                                              dusuk=np.array([self.right_menu.MIN_h.value(),self.right_menu.MIN_s.value(),self.right_menu.MIN_v.value()]),
+                                              yüksek=np.array([self.right_menu.MAX_h.value(),self.right_menu.MAX_s.value(),self.right_menu.MAX_v.value()]),
                                               threshold=(self.right_menu.MIN_V.value(),self.right_menu.MAX_V.value()),
                                               green_perde=False)
 
@@ -356,8 +149,8 @@ class setup(QMainWindow):
                     self.left_menu.resim1_abount.clear()
 
                 if self.right_menu.mask.checkState()==2:
-                    mask=self.cv2_to_pixmap(mask,format=QImage.Format_Grayscale8)
-                    self.left_menu.resim4.setPixmap(mask)
+                    black_mask=self.cv2_to_pixmap(black_mask,format=QImage.Format_Grayscale8)
+                    self.left_menu.resim4.setPixmap(black_mask)
                     self.left_menu.resim4_abount.setText("black mask")
                 else:
                     self.left_menu.resim4.clear()
@@ -373,8 +166,8 @@ class setup(QMainWindow):
                     self.left_menu.resim2_abount.clear()
 
                 if self.right_menu.green.checkState()==2:
-                    green=self.cv2_to_pixmap(green)
-                    self.left_menu.resim3.setPixmap(green)
+                    white_mask=self.cv2_to_pixmap(white_mask)
+                    self.left_menu.resim3.setPixmap(white_mask)
                     self.left_menu.resim3_abount.setText("white mask")
 
                 else:
@@ -387,6 +180,12 @@ class setup(QMainWindow):
 
 
 
+    def closeEvent(self, event):
+        exit()
+
+
+
+
 
 
 
@@ -394,5 +193,3 @@ app = QApplication(sys.argv)
 dowland = setup()
 dowland.show()
 sys.exit(app.exec_())
-cv2.waitKey(0)
-cv2.destroyAllWindows()
