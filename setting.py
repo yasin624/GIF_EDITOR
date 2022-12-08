@@ -46,7 +46,7 @@ class Right_menu(QWidget):
     def gif_upload(self,src):
         liste=[]
         for i in os.listdir(src):
-            if i.endswith(".gif"):
+            if i.endswith(".gif") or i.endswith(".jpg") or i.endswith(".png"):
                 liste.append(i)
 
         return liste
@@ -249,6 +249,24 @@ class Right_menu(QWidget):
         sped.addStretch()
 
         return sped
+
+    def size_control(self):
+        ###############################################  # GİF SPEAT
+        self.fram_size =  self.QObje(QSlider(Qt.Horizontal),1,12,1,(200,20),value=3)
+        self.fram_size_v =  self.QObje(QSpinBox(),1,12,1,(50,20),value=3)
+        self.fram_size_v.valueChanged.connect(self.fram_size.setValue)
+        self.fram_size.valueChanged.connect(self.fram_size_v.setValue)
+
+        size = QHBoxLayout()
+        size.addStretch()
+        size.addWidget(QLabel("size :".ljust(self.fixed,self.fixed_v)))
+        size.addStretch()
+        size.addWidget(self.fram_size)
+        size.addStretch()
+        size.addWidget(self.fram_size_v)
+        size.addStretch()
+
+        return size
     def setting(self):
         ###############################################   the button dowloand files
         self.start = QPushButton(self)
@@ -336,16 +354,17 @@ class Right_menu(QWidget):
         setting.addStretch()
         setting.addStretch()
 
-        setting.addLayout(self.spead_control())
-        setting.addStretch()
-        setting.addStretch()
 
 
         self.div.addLayout(setting)
 
         self.div.addStretch()
+        self.div.addLayout(self.size_control())
         self.div.addStretch()
         self.div.addStretch()
+        self.div.addLayout(self.spead_control())
+        self.div.addStretch()
+
         self.div.addStretch()
 
         button1 = QHBoxLayout()
