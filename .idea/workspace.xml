@@ -33,7 +33,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
-  <component name="RunManager" selected="Python.scratch_12">
+  <component name="RunManager" selected="Python.GUI">
     <configuration name="GUI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="GIF_EDITOR" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -162,9 +162,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.GUI" />
         <item itemvalue="Python.scratch_12" />
         <item itemvalue="Python.scratch_11" />
-        <item itemvalue="Python.GUI" />
         <item itemvalue="Python.setting" />
         <item itemvalue="Python.setup" />
       </list>

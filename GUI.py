@@ -11,12 +11,11 @@ from dowload import DOWLAND
 
 
 
-
+#######################################################################  these code blocks is a GUI for whole the gif_edit
 class setup(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.gif_src=r"img_and_gift\rasengan2.gif"
-        ##########################################################  table
+        ##########################################################   adds new menus
         self.left_menu = Left_menu()
         self.right_menu = Right_menu()
         self.gif_dowload = DOWLAND()
@@ -26,23 +25,23 @@ class setup(QMainWindow):
         self.setWindowIcon(QIcon("logo.ico"))
         self.setMinimumSize(1200,800)
 
+        self.start=True             ########  this vereable plays again the gif
+        self.start_gif=True         ########  this vereable plays the gif
+        self.start_frame=False      ########  this vereable plays again the image
+        self.clear=clear_gif()      ########  this code clear becground of gifs,imgs or movies
 
-        self.fixed_size=(300,300)
-        self.start=True
-        self.start_gif=True
-        self.start_frame=False
-        self.clear=clear_gif()
-        ######################################################## they parameters 'boundedTo', 'expandedTo', 'grownBy','scale', 'scaled', 'setHeight', 'setWidth', 'shrunkBy', 'transpose', 'transposed', 'width'
         self.içerik()
 
+
+    #################################################################### these code block is  main menu of GUI
     def içerik(self):
-        #######################################################  text menu
+        #######################################################  this codes is menubar
         menu = self.menuBar()
         self.dosya = menu.addMenu("file")
         self.konum = QAction("Dowland files")
         self.dosya.addAction(self.konum)
 
-        ######################################################  table menu
+        ######################################################  these code block makes tabs of GUI
         self.tablo = QTabWidget()
 
         self.tablo.tablo1 = QWidget()
@@ -56,25 +55,33 @@ class setup(QMainWindow):
         self.setStatusBar(self.status)
         self.status.showMessage("Tüm hakları saklıdır © 2020 | yalcınyazılımcılık")
 
-        ###################################################   full the tables
+        ###################################################   this fulls the tabs
         self.tab1()
         self.tab2()
         self.setCentralWidget(self.tablo)
-        ################################################################### file download location
+        ###################################################################  if will this button is pressed , opens the up menu
         self.dosya.triggered.connect(self.konum_belirle)
-
+        ################################################################### if will this button is pressed ,controls which type is  the gif,movie and image for the playing
         self.right_menu.start.clicked.connect(self.gif_frame_control)
+
+        ################################################################### if will this buttom is pressed , stops to again  play gif
         self.right_menu.stop_gif.clicked.connect(self.stoped)
 
+        ################################################################### if will change gifs's value , stops to play gif
         self.right_menu.gifs.currentIndexChanged.connect(self.stop_gif)
+
+        ################################################################### if will this button is pressed ,controls which type is the gif,movie and image for the download
         self.gif_dowload.download.clicked.connect(self.frame_or_gif_control_dowland)
 
+    ############################################# these code blocks control which type is gif,movie,and image for download
     def frame_or_gif_control_dowland(self):
         tip=self.right_menu.gifs.currentText()
         if tip.endswith(".gif"):
             self.gifDowloand()
         elif tip.endswith(".jpg") or tip.endswith(".png"):
             self.frameDowload()
+
+    ############################################  these code blocks control which type is gif,movie and image for playing
     def gif_frame_control(self):
         src="img_and_gift/"+self.right_menu.gifs.currentText()
         if src.endswith(".gif"):
@@ -85,7 +92,7 @@ class setup(QMainWindow):
             self.start=False
             self.start_frame=True
             self.show_frame(src)
-
+    ########################################### these code blocks control which image is selected
     def Frame_control_of_download(self,orginal_frame,black_mask,frame,white_mask):
         if self.gif_dowload.frame.isChecked():
             return orginal_frame
@@ -96,7 +103,7 @@ class setup(QMainWindow):
         elif self.gif_dowload.revers_mask.isChecked():
             return frame
 
-
+    #########################################  these code blocks download images as .png
     def frameDowload(self):
         orginal_frame=cv2.imread("img_and_gift/"+self.right_menu.gifs.currentText())
 
@@ -104,13 +111,15 @@ class setup(QMainWindow):
 
 
         image=self.Frame_control_of_download(orginal_frame,black_mask,frame,white_mask)
-        isim=self.gif_dowload.file_name(url=self.gif_dowload.src.text(),tip="png")
+
+        isim=self.gif_dowload.file_name(url=self.gif_dowload.src.text(),tip="png")  #### finds new file name
         self.gif_dowload.src.setText(isim)
-        print(isim)
         cv2.imwrite(self.gif_dowload.src.text(),image)
 
-        self.gif_dowload.src.setText(self.gif_dowload.file_name(url=self.gif_dowload.src.text(),tip="png"))
+        self.gif_dowload.src.setText(self.gif_dowload.file_name(url=self.gif_dowload.src.text(),tip="png")) #### finds and writes  the new filename  to the GUI
 
+
+    #################################################   these code downloads gif and video files
     def gifDowloand(self):
 
         gif_video=cv2.VideoCapture("img_and_gift/"+self.right_menu.gifs.currentText())
@@ -125,6 +134,7 @@ class setup(QMainWindow):
         self.gif_dowload.gif_to_npy(self.gif_dowload.src.text(),gif_frams)
         self.gif_dowload.src.setText(self.gif_dowload.file_name(url=self.gif_dowload.src.text()))
 
+    ####################################################  this function adds left and right menu to tab1
     def tab1(self):
 
 
@@ -138,6 +148,8 @@ class setup(QMainWindow):
 
 
         self.tablo.tablo1.setLayout(parse)
+
+    ############################################### this function adds download tab to tab2
     def tab2(self):
 
 
@@ -146,16 +158,8 @@ class setup(QMainWindow):
         parse.addWidget(self.gif_dowload)
 
         self.tablo.tablo2.setLayout(parse)
-    def dowloand(self):
-        try:
-            file_local = self.yol_k.link.text()
-            url_local = self.main_m.url.text()
-            self.main_m.url.setText("")
-            self.dowland_l.send(" " if file_local == None else str(file_local),
-                                " " if url_local == None else str(url_local))
-        except:
-            print("hata 2")
 
+    #############################################   this function if will "download files " is pressed  in up menu,goes  dowload  tab
     def konum_belirle(self, dene):
         # cur_index = self.tabWidget.currentIndex() tablo indexleri
 
@@ -163,21 +167,24 @@ class setup(QMainWindow):
             self.tablo.setCurrentIndex(1)
         self.status.showMessage("Tüm hakları saklıdır © 2020 | yalcınyazılımcılık")
 
-
+    ##########################################################  this function cv2 image arrays change to QPixmap arrays
     def cv2_to_pixmap(self,img,format=QImage.Format_BGR888):
 
         img =  QImage(img, img.shape[1], img.shape[0], format)
         return QPixmap.fromImage(img)
+
+    ################################# this function stops to again play gif
     def stoped(self):
         self.start=False
 
-
+    ################################ this function stops whole to again play gif,movie and image
     def stop_gif(self):
         self.start_gif=False
         self.start=False
         self.start_frame=False
         self.gif_frame_control()
 
+    ############################## this function shows again and again images
     def show_frame(self,src):
         clear=clear_gif()
         orginal_frame=cv2.imread(src)
@@ -194,6 +201,7 @@ class setup(QMainWindow):
             self.gif_control_and_img_update(orginal_frame,black_mask,frame,white_mask)
             cv2.waitKey(self.right_menu.SPEAD_V.value())
 
+    ############################################# this function clears backgrount according to different rules
     def clearBackroung(self,orginal_frame):
 
         frame,black_mask,white_mask=self.clear.Delete(orginal_frame,
@@ -206,6 +214,8 @@ class setup(QMainWindow):
 
         return frame,black_mask,white_mask
 
+
+    ########################################## this function shows or not shows  image arrays,gif frames or video frames  to GUI
     def gif_control_and_img_update(self,orginal_frame,black_mask,frame,white_mask):
 
         if self.right_menu.frame.checkState()==2:
@@ -242,6 +252,9 @@ class setup(QMainWindow):
             self.left_menu.resim3.clear()
             self.left_menu.resim3_abount.clear()
 
+
+    #################################################  this function shows again and again  gif or movie frames
+
     def show_gif(self,src):
 
         clear=clear_gif()
@@ -269,7 +282,7 @@ class setup(QMainWindow):
 
 
 
-
+    ################################  in this function  if will software closed , finals whole functions
     def closeEvent(self, event):
         exit()
 
