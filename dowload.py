@@ -6,27 +6,21 @@ from PyQt5.QtGui import *
 import numpy as np
 import sys, os,cv2
 
+
+
+#############################################################   these class code blocks is  the menu of the dowland tab
 class DOWLAND (QWidget):
     def __init__(self):
         super().__init__()
-        self.setting3_value=23
-        self.fixed=12
-        self.fixed_v=" "
-        self.setAutoFillBackground(True)
-        self.setBackgroundRole(QPalette.Button)
+        # self.setting3_value=23
+        self.fixed=12     ############################ this code sets arrays of objects left justified and this is the length of the strings
+        self.fixed_v=" "     ######################### this code shows what type to set the length of the texts
+        self.setAutoFillBackground(True)            ## GUI bacground say fill or not fill
+        self.setBackgroundRole(QPalette.Button)     ## sets the  GUI bacground color
         self.setting()
 
-    def QObje(self,obje,min,max,step,size=(100,10),value=0,togather=None):
-        # Kaydırma tuşunun hareket edeceği minimum ve maksimum değerlerini ayarlayın
-        o=obje
-        o.setMinimum(min)
-        o.setMaximum(max)
-        # Kaydırma tuşunun ne kadar adımda hareket edeceğini ayarlayın
-        o.setSingleStep(step)
-        o.setFixedWidth(size[0])
-        o.setFixedHeight(size[1])
-        o.setValue(value)
-        return o
+
+    ########################################################################  these code blocks are the setting of QCheckbox or QRadioButton objects
     def Checkboxx(self,checbox,name="",ceched=False,tristate=False):
         # QCheckBox nesnesini oluşturun ve metni ayarlayın
         checbox.setText(name)
@@ -34,6 +28,7 @@ class DOWLAND (QWidget):
         checbox.setChecked(ceched)
         return checbox
 
+    ####################################################################### these code blocks are the setting of the QCombobox objects
     def Comboboxx(self,items=[],size=(100,30),edit=False):
         combo = QComboBox()
         combo.addItems(items)
@@ -43,8 +38,8 @@ class DOWLAND (QWidget):
         combo.setFixedHeight(size[1])
         return  combo
 
+    ######################################################################### these code blocks is the main menu of checkboxx and QRadioButton
     def chackboxs(self):
-        ######################################################################
         self.frame=self.Checkboxx(QRadioButton(),"orginal",True)
         self.mask=self.Checkboxx(QRadioButton(),"black mask",False)
         self.green=self.Checkboxx(QRadioButton(),"white mask",False)
@@ -63,6 +58,7 @@ class DOWLAND (QWidget):
 
         return checck
 
+   ###########################################   edits menu of localetion
     def Düzen(self,Qwidget,args):
         src = QHBoxLayout()
         src.addWidget(args[0])
@@ -75,10 +71,12 @@ class DOWLAND (QWidget):
 
         return src
 
+    ######################################  saves gif's np.arrays  , as .npy file
     def gif_to_npy(self,src,arrays):
 
         np.save(src,arrays)
 
+    ############################################################################  finds new file names for saved files
     def file_name(self,default_name="new_gift_",tip="npy",url="duzenli_gifler"):
         liste=[]
 
@@ -101,19 +99,19 @@ class DOWLAND (QWidget):
 
 
 
-
+    ############################################################### these code blocks are main menu of dowland tab
     def setting(self):
-        ###############################################   the button dowloand files
+        ###############################################  button saves your wants file
         self.download = QPushButton(self)
         self.download.setText("Dowloand")
         self.download.setFont(QFont("Ariel", 10))
-        ######################################################### new localetion
+        ######################################################### button finds your want localition
         self.local = QPushButton(self)
         self.local.setText("▼")
         self.local.setFont(QFont("Ariel",15))
         self.local.setFixedWidth(30)
         self.local.setFixedHeight(30)
-        #########################################################
+        ######################################################### local address shows you
         self.src = QLineEdit(self)
         self.src.setText(self.file_name(url=os.getcwd()+r"\duzenli_gifler"))
         self.src.setFont(QFont("Ariel", 8))
@@ -151,11 +149,14 @@ class DOWLAND (QWidget):
             button1.addStretch()
 
 
+        #############################################  this code if will  local button is press, binds chancle_src
         self.local.clicked.connect(self.chancle_src)
 
         self.div.addLayout(button1)
 
         self.setLayout(self.div)
+
+    ##################################################### this code blocks shows you want address prints to the  GUI
     def chancle_src(self):
         try:
             src=QFileDialog.getExistingDirectoryUrl()

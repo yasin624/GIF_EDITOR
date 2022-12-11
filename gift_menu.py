@@ -3,32 +3,38 @@ import sys, os,cv2
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
-
+####################################  this class is for images menu
 class Left_menu(QWidget):
     def __init__(self):
         super().__init__()
 
         self.etiketler()
+
+    ######################################################################  this code blocks is grids  of gif frames or  img values
     def boxses(self,img,text):
         boxx = QVBoxLayout()
         boxx.addWidget(text)
         boxx.addStretch()
         boxx.addWidget(img)
         return boxx
+
     def etiketler(self):
-        ###############################################   app main icon
+        ###############################################   image  and label of grid for orginal frame
         self.resim1 = QLabel(self)
         self.resim1_abount=QLabel(self)
-        ###############################################   app main icon
+        ###############################################   image and label of grid for frame
         self.resim2 = QLabel(self)
         self.resim2_abount=QLabel(self)
-        ###############################################   app main icon
+        ###############################################   image and label of grid for white mask
         self.resim3 = QLabel(self)
         self.resim3_abount=QLabel(self)
-        ###############################################   app main icon
+        ###############################################   image and lalbel of grid for mask
         self.resim4 = QLabel(self)
         self.resim4_abount=QLabel(self)
-        ###############################################   arrangement
+
+
+        ###################################################################  these code blocks are main menu code for the  left menu
+
         v = QVBoxLayout()
         l = QHBoxLayout()
         l.addWidget(QLabel("<h1><i> IMAGES LAYER </i></h1>"))
