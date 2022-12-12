@@ -40,7 +40,7 @@ Your browser does not support the video tag.
 </div></div>
 
 
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 ### **SAĞ BÖLÜM**
