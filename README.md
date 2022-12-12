@@ -41,7 +41,7 @@ Your browser does not support the video tag.
 
 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
+<br/><br/>
 
 ### **SAĞ BÖLÜM**
 <hr width="150px"  align="left">
@@ -52,7 +52,7 @@ Your browser does not support the video tag.
 <img src="show/name.png"  width="45%" align="right" height="100%"  > </img>
 </div>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 <div align="left" width="40%" >
