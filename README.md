@@ -4,11 +4,7 @@
 # **PROJE ADI : GİF EDİT**
 
 <div   height="600px">
-
-<video width="100%" height="100%" controls>
-  <source src="show/gifedit.mp4" type="video/mp4">
-
-</video>
+<img src="show/main.png"  width="100%"  height="100%"> </img>
 
 
 Your browser does not support the video tag.
@@ -44,7 +40,7 @@ Your browser does not support the video tag.
 </div></div>
 
 
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 ### **SAĞ BÖLÜM**
@@ -56,7 +52,7 @@ Your browser does not support the video tag.
 <img src="show/name.png"  width="45%" align="right" height="100%"  > </img>
 </div>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/>
 
 
 <div align="left" width="40%" >
@@ -95,7 +91,7 @@ Your browser does not support the video tag.
 ### En sondaki tuşlar ise çerçevelerinizin yenilenmelerini durdurmaktadır.
 </div>
 
-<br/><br/><br/>
+<br/><br/><br/><br/><br/>
 
 <div>
 
