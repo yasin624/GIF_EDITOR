@@ -4,9 +4,15 @@
 # **PROJE ADI : GİF EDİT**
 
 <div   height="600px">
-<img src="show/main.png"  width="100%"  height="100%"> </img>
+
+<video width="100%" height="100%" controls>
+  <source src="show/gifedit.mp4" type="video/mp4">
+
+</video>
 
 
+Your browser does not support the video tag.
+</video>
 <br/>
 
 ###  Python kullanarak oluşturmuş olduğum buuygulama sayesinde gif , kısa videolar ve resimlerinizi görüntü işleme tekniklerinden olan threshold ve hsv  tekniklerini kullanarak bu tip teki dosyalarınızın arkaplanlarını silmenize olanak tanır.
