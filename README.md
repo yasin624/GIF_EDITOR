@@ -26,6 +26,7 @@
 <br/>
 
 <div>
+
 ### **SOL BÖLÜM**
 <hr width="150px"  align="left">
 <br/>
@@ -42,13 +43,14 @@
 
 ### **SAĞ BÖLÜM**
 <hr width="150px"  align="left">
+<br/><br/>
 <div>
 <img src="show/right_menu.png" align="left" width="50%"  height="100%" > </img>
-<img src="show/clear_tip.png" align="right" width="47%"  height="100%" > </img>
-<img src="show/name.png"  width="47%" align="right" height="100%"  > </img>
+<img src="show/clear_tip.png" align="right" width="45%"  height="100%" > </img>
+<img src="show/name.png"  width="45%" align="right" height="100%"  > </img>
 </div>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/>
 
 
 <div align="left" width="40%" >
@@ -73,7 +75,7 @@
 </div>
 
 
-
+<div>
 <img src="show/main3.png" align="left" width="100%"  height="100%" > </img>
 
 
@@ -81,4 +83,24 @@
 <br/><br/><br/><br/>
 
 <p>Bunların altında ise bulunan  size değerinide değiştirerek çerçevelerinizin boyunu ayarlayabilirsiniz  </p>
+
+<p> Sonraki ayarda ise çerçevelerinizin GUI üzerinden yenilenme hızlarını yansıtmaktadır.  </p>
+
+### En sondaki tuşlar ise çerçevelerinizin yenilenmelerini durdurmaktadır.
+</div>
+
+<br/><br/><br/><br/><br/>
+
+<div>
+
+### **DOWLOAD SEKMESİ**
+
+<hr width="200px"  align="left">
+<br/>
+
+<img src="show/download.png" align="left" width="100%"  height="100%" > </img>
+
+
+### Download sekmesinde ise dosyalarımızın tipine ve istediğimiz maskeleme şeklini seçerek belirtiğiniz yola indirmenizi sağlamaktadır ,
+
 </div>
