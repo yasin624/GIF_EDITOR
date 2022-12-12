@@ -38,7 +38,7 @@
 </div></div>
 
 
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 ### **SAĞ BÖLÜM**
@@ -50,7 +50,7 @@
 <img src="show/name.png"  width="45%" align="right" height="100%"  > </img>
 </div>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 <div align="left" width="40%" >
