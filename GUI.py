@@ -122,6 +122,38 @@ class setup(QMainWindow):
     #################################################   these code downloads gif and video files
     def gifDowloand(self):
 
+<<<<<<< HEAD
+
+        if self.gif_dowload.array_gif.currentText()=="numpy":
+            gif_video=cv2.VideoCapture("img_and_gift/"+self.right_menu.gifs.currentText())
+            gif_frams=[]
+            while True:
+                okay, orginal_frame = gif_video.read()
+                if not okay :
+                    break
+                frame,black_mask,white_mask=self.clearBackroung(orginal_frame)
+                gif_frams.append(self.Frame_control_of_download(orginal_frame,black_mask,frame,white_mask))
+                cv2.waitKey(1)
+            self.gif_dowload.gif_to_npy(self.gif_dowload.src.text(),gif_frams)
+            self.gif_dowload.src.setText(self.gif_dowload.file_name(url=self.gif_dowload.src.text()))
+
+        elif self.gif_dowload.array_gif.currentText()=="gif":
+            gif_video=cv2.VideoCapture("img_and_gift/"+self.right_menu.gifs.currentText())
+            gif_frams=[]
+
+            while True:
+                okay, orginal_frame = gif_video.read()
+                if not okay :
+                    break
+                frame,black_mask,white_mask=self.clearBackroung(orginal_frame)
+                gif_frams.append(self.Frame_control_of_download(orginal_frame,black_mask,frame,white_mask))
+                cv2.waitKey(1)
+            print("gif shape : ",(len(gif_frams),gif_frams[0][0]))
+            self.gif_dowload.src.setText(self.gif_dowload.file_name(url=self.gif_dowload.src.text(),tip="mp4"))
+            self.gif_dowload.gif_to_mp4(self.gif_dowload.src.text(),gif_frams,
+                                        sped=int(1000/self.right_menu.SPEAD_V.value()))
+            self.gif_dowload.src.setText(self.gif_dowload.file_name(url=self.gif_dowload.src.text(),tip="mp4"))
+=======
         gif_video=cv2.VideoCapture("img_and_gift/"+self.right_menu.gifs.currentText())
         gif_frams=[]
         while True:
@@ -133,6 +165,7 @@ class setup(QMainWindow):
             cv2.waitKey(1)
         self.gif_dowload.gif_to_npy(self.gif_dowload.src.text(),gif_frams)
         self.gif_dowload.src.setText(self.gif_dowload.file_name(url=self.gif_dowload.src.text()))
+>>>>>>> parent of 1ebae92 (stabil_version)
 
     ####################################################  this function adds left and right menu to tab1
     def tab1(self):
@@ -186,7 +219,7 @@ class setup(QMainWindow):
 
     ############################## this function shows again and again images
     def show_frame(self,src):
-        clear=clear_gif()
+        #clear=clear_gif()
         orginal_frame=cv2.imread(src)
 
         while self.start_frame:
@@ -227,7 +260,7 @@ class setup(QMainWindow):
             self.left_menu.resim1_abount.clear()
 
         if self.right_menu.mask.checkState()==2:
-            black_mask=self.cv2_to_pixmap(black_mask,format=QImage.Format_Grayscale8)
+            black_mask=self.cv2_to_pixmap(black_mask)
             self.left_menu.resim4.setPixmap(black_mask)
             self.left_menu.resim4_abount.setText("black mask")
         else:
@@ -257,7 +290,7 @@ class setup(QMainWindow):
 
     def show_gif(self,src):
 
-        clear=clear_gif()
+        #clear=clear_gif()
         while self.start:
             self.start_gif=True
             self.gif_video=cv2.VideoCapture(src)

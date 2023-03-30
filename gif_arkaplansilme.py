@@ -30,10 +30,13 @@ class gif_background_delete():
             gif_hsv=cv2.cvtColor(gif,cv2.COLOR_BGR2HSV)
             mask=cv2.inRange(gif_hsv,dusuk,yüksek)
 
-            new=np.zeros(gif.shape,dtype=np.uint8)
-            new[:,:]=[255,255,255]
-            reverse_mask=cv2.bitwise_not(new,new,mask=mask)
+            new_white=np.zeros(gif.shape,dtype=np.uint8)
+            new_white[:,:]=[255,255,255]
+            new_black=np.zeros(gif.shape,dtype=np.uint8)
+
+            reverse_mask=cv2.bitwise_not(new_white,new_white,mask=mask)
             end_img=cv2.bitwise_and(gif,gif,mask=mask)
+            mask=cv2.bitwise_not(new_black,new_black,mask=mask)
 
 
 
@@ -41,15 +44,20 @@ class gif_background_delete():
             gif_gray=cv2.cvtColor(gif,cv2.COLOR_BGR2GRAY)
             ras,mask=cv2.threshold(gif_gray,threshold[0],threshold[1],cv2.THRESH_BINARY)
 
-            new=np.zeros(gif.shape,dtype=np.uint8)
-            new[:,:]=[255,255,255]
+
+            new_white=np.zeros(gif.shape,dtype=np.uint8)
+            new_white[:,:]=[255,255,255]
+            new_black=np.zeros(gif.shape,dtype=np.uint8)
+
             end_img=cv2.bitwise_and(gif,gif,mask=mask)
-            reverse_mask=cv2.bitwise_not(new,new,mask=mask)
-            #cv2.imshow("end_img",np.array(end_img,dtype=np.uint8))
+            reverse_mask=cv2.bitwise_not(new_white,new_white,mask=mask)
+            mask=cv2.bitwise_not(new_black,new_black,mask=mask)
+
 
 
         if green_perde: ######################################## if you give  the green_perde's value  is type  tuple (0,0,0) values  ,it return the image with you want colorful background,colorful mask and colorful revers_mask
             green=self.perde(end_img.copy(),mask,green_perde,background)
+
             return end_img,mask,green
 
         return end_img,mask,reverse_mask
