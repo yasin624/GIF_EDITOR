@@ -167,3 +167,15 @@ class DOWLAND (QWidget):
 
 
 
+    def gif_to_mp4(self,src,frams,speed):
+        # Kaydedilecek video özellikleri
+        width = frams[0].shape[1]
+        height = frams[0].shape[0]
+        codec = cv2.VideoWriter_fourcc(*'mp4v')
+        out = cv2.VideoWriter(src, codec, speed, (width, height))
+        for i in frams:
+            out.write(i)
+
+
+
+
