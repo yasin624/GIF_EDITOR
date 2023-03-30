@@ -5,8 +5,10 @@
 
 <div   height="600px">
 <img src="show/main.png"  width="100%"  height="100%"> </img>
-<a src="show/gifedit.mp4"> videoya burdan ulaş </a>
 
+
+Your browser does not support the video tag.
+</video>
 <br/>
 
 ###  Python kullanarak oluşturmuş olduğum buuygulama sayesinde gif , kısa videolar ve resimlerinizi görüntü işleme tekniklerinden olan threshold ve hsv  tekniklerini kullanarak bu tip teki dosyalarınızın arkaplanlarını silmenize olanak tanır.
